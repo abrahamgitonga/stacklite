@@ -2,9 +2,9 @@ POST http://localhost:3030/user/signup
 Content-Type: application/json
 
 {
-    "username":"jandoe",
-    "email": "jandoe@example.com",
-    "password": "1234qwer"
+    "email": "doe@mail.com",
+    "username":"doe",
+    "password": "123456789"
 }
 
 ###
@@ -12,8 +12,8 @@ POST http://localhost:3030/user/login
 Content-Type: application/json
 
 {
-    "email": "janedoe@example.com",
-    "password": "1234qwert"
+    "email": "doe@mail.com",
+    "password": "123456789"
 }
 
 //questions
@@ -32,7 +32,7 @@ token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFH
 
 ###
 POST http://localhost:3030/questions/      
-token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0 
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvZUBtYWlsLmNvbSIsInVzZXJuYW1lIjoiZG9lIiwiaWF0IjoxNjcxNjMzMzQ2LCJleHAiOjE2NzE2NDczNDZ9.URrY8eNhZAUiLR3cYs83ITatJN43744y6WtIiXX4QY8 
 Content-Type: application/json
 
 {

@@ -10,14 +10,14 @@ import ErrorBox from "../Common/ErrorBox";
 import {Helmet} from "react-helmet";
 
 const Container = styled.div`
-  padding: 25px;
-  //border: 1px solid red;
-  max-width: 400px;
-  min-height: 400px;
-  box-sizing: border-box;
-  box-shadow: 4px 2px 16px rgba(0, 0, 0, 0.4);
-  border-radius: 10px;
-  margin:  20px auto 0 auto;
+padding: 25px;
+//border: 1px solid red;
+max-width: 400px;
+min-height: 400px;
+box-sizing: border-box;
+box-shadow: 4px 2px 16px rgba(0, 0, 0, 0.4);
+border-radius: 10px;
+margin:  20px auto 0 auto;
 `;
 
 class LoginPage extends Component {
@@ -30,7 +30,7 @@ class LoginPage extends Component {
       error: false,
     }
   }
-
+  
   async login(ev) {
     ev.preventDefault();
     try {
@@ -38,21 +38,16 @@ class LoginPage extends Component {
         email: this.state.email,
         password: this.state.password
       })
+      localStorage.setItem("token", res.data.token)
       return res.data
     } catch (error) {
       console.log(error)
       
     }
  
-  //   }, {withCredentials: true})
-  //     .then(() => {
-  //       this.context.checkAuth().then(() => {
-  //         this.setState({error:false,redirectToHomePage: true});
-  //       });
-  //     })
-  //     .catch(() => this.setState({error:true}));
-  // }
+ 
   }
+
   render() {
     return (<>
       <Helmet>

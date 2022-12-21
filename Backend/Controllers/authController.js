@@ -15,7 +15,7 @@ const signupUser = async (req, res) => {
     const id = v4();
     const hashedpassword = await bcrypt.hash(password, 8);
     const data = { id, username, email, password: hashedpassword };
-    console.log(data);
+    //console.log(data);
     await exec('add_UpdateUser', data);
      res.status(201).json({ message: "success"});
   } catch (error) {
@@ -37,30 +37,25 @@ const updateUser = async (req, res) => {
     return res.status(400).json({ error: error.message });
   }
 };
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await exec("getOneUser", { email });
 
-const loginUser= async(req,res)=>{
-    try {
-        const {email,password}= req.body;
-        const user =await (await exec('getOneUser', {email})).recordset[0]
-        if(user){
-            // password checking
-            
-        const checkPassword= await bcrypt.compare(password, user.password)
-          if(checkPassword){
-            const {password, id ,...payload}=user
-            const token = jwt.sign(payload,process.env.SECRET, {expiresIn:'12000s'})
-            return res.status(200).json({message:'Logged in !!',token})
-          }else{
-           return res.status(400).json({message:"User Not Found"})
-          }
-        }else{
-            return res.status(400).json({message:"User Not Found"})
-        }
-        
-    } catch (error) {
-         return res.status(400).json({message:error.message})
-    }
-}
+  const correct = await bcrypt.compare(password, user[0].password);
+  if (correct) {
+    let { id, email, username } = user[0];
+ 
+    
+   
+    let payload = { id, email,  username };
+    let token = await jwt.sign(payload, process.env.SECRET, {
+      expiresIn: "14000s",
+    });
+    res.status(200).json({ token });
+  } else {
+    res.status(400).json({ error: "incorrect password" });
+  }
+};
 module.exports = {
   signupUser,
   loginUser,
