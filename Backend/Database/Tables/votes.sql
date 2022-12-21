@@ -1,0 +1,8 @@
+CREATE TABLE votes
+(
+    _id INT IDENTITY NOT NULL PRIMARY KEY,
+    author INT FOREIGN KEY REFERENCES users,
+    answer INT FOREIGN KEY REFERENCES answers,
+    votes INT NOT NULL
+
+);

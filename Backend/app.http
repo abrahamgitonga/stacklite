@@ -1,0 +1,130 @@
+POST http://localhost:3030/user/signup
+Content-Type: application/json
+
+{
+    "username":"jan doe",
+    "email": "jandoe@example.com",
+    "password": "1234qwer"
+}
+
+###
+POST http://localhost:3030/user/login
+Content-Type: application/json
+
+{
+    "email": "janedoe@example.com",
+    "password": "1234qwert"
+}
+
+//questions
+
+###
+GET http://localhost:3030/questions
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0
+
+###
+GET http://localhost:3030/questions/author/fghjjke
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0
+
+###
+GET http://localhost:3030/questions/2456416c-f2ee-447c-9c4a-11ca835555ea
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0
+
+###
+POST http://localhost:3030/questions/      
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0 
+Content-Type: application/json
+
+{
+ 
+   "title":"programming languages to learn",
+   "content": "beginner programming languages",
+   "tags": "programming"
+}
+
+###
+PUT http://localhost:3030/questions/2456416c
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0
+Content-Type: application/json
+
+{
+    "title":"programming languages to learn",
+    "content": "beginner programming languages",
+    "tags": "programming"
+}
+
+###
+DELETE http://localhost:3030/questions/kguj
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0
+
+
+###
+POST http://localhost:3030/posts
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0
+Content-Type: application/json
+
+{
+ 
+   "question_id":"222961db-adfe-4f04-a91c-44a238e1e55d",
+   "answer":"start with c language"
+   
+}
+
+
+###
+PUT http://localhost:3030/questions/answer/marked
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0
+Content-Type: application/json
+
+{
+    "id":"qhjnnnin"
+}
+
+###
+PUT http://localhost:3030/questions/answer/unmarked
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0
+Content-Type: application/json
+
+{
+    "id":"qhjnnnin"
+}
+
+###
+POST http://localhost:3030/questions/answer/comment
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0
+Content-Type: application/json
+
+{   
+   "answer_id":"fegfd",
+   "comment":"c is easy learning"
+}
+
+###
+DELETE   http://localhost:3030/questions/comment/1a639954
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0
+
+###
+POST http://localhost:3030/questions/answer/upvote
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0
+Content-Type: application/json
+
+{
+   "answer_id":"0afddddgddgeg"
+}
+
+
+###
+POST http://localhost:3030/questions/answer/downvote
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0
+Content-Type: application/json
+
+{
+   "answer_id":"adab94ed-f426-4bc7-8c45-b5a424bfbe04"
+}
+
+
+###
+GET  http://localhost:3030/questions/ordered/top
+token: eyJhbGciOiJIUzI1NiJ9.amFuZWRvZUBleGFtcGxlLmNvbQ.ZyD4mFT_2Mji4zjvjam1DjxFHFUBwbn9Adj1CI34HJ0
+
+

@@ -1,0 +1,9 @@
+CREATE TABLE comments
+(
+    _id INT IDENTITY NOT NULL PRIMARY KEY,
+    content TEXT NOT NULL,
+    author INT FOREIGN KEY REFERENCES users,
+    answer INT FOREIGN KEY REFERENCES answers,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    is_deleted BIT NOT NULL DEFAULT 0,
+);
