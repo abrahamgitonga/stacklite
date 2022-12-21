@@ -1,7 +1,11 @@
 CREATE OR ALTER PROCEDURE add_UpdateUser
-    @username VARCHAR(300),
-    @email VARCHAR(300),
-    @password VARCHAR(300)
+    @id VARCHAR(255),
+    @username VARCHAR
+(300),
+    @email VARCHAR
+(300),
+    @password VARCHAR
+(300)
 AS
 BEGIN
     IF @email = (SELECT email
@@ -13,9 +17,9 @@ BEGIN
         [password] = @password;
 else
     INSERT INTO users
-        ( username, email, [password])
+        ( _id,username, email, [password])
     VALUES
-        ( @username, @email, @password);
+        ( @id, @username, @email, @password);
 END
 
 
@@ -26,3 +30,6 @@ END
 -- SELECT email
 -- FROM dbo.users
 -- WHERE email='randomuser@gmail.com';
+
+SELECT *
+from dbo.users

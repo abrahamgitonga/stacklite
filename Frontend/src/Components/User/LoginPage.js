@@ -31,18 +31,27 @@ class LoginPage extends Component {
     }
   }
 
-  login(ev) {
+  async login(ev) {
     ev.preventDefault();
-    axios.post('http://localhost:3030/users/login', {
-      email: this.state.email,
-      password: this.state.password,
-    }, {withCredentials: true})
-      .then(() => {
-        this.context.checkAuth().then(() => {
-          this.setState({error:false,redirectToHomePage: true});
-        });
+    try {
+      const res = await axios.post('http://localhost:3030/user/login', {
+        email: this.state.email,
+        password: this.state.password
       })
-      .catch(() => this.setState({error:true}));
+      return res.data
+    } catch (error) {
+      console.log(error)
+      
+    }
+ 
+  //   }, {withCredentials: true})
+  //     .then(() => {
+  //       this.context.checkAuth().then(() => {
+  //         this.setState({error:false,redirectToHomePage: true});
+  //       });
+  //     })
+  //     .catch(() => this.setState({error:true}));
+  // }
   }
   render() {
     return (<>
