@@ -26,26 +26,32 @@ class RegisterPage extends Component {
     this.state = {
       email: '',
       password: '',
-      name: '',
+      username: '',
       redirectToTheHomePage: false,
       error: false,
     }
   }
 
-  register(ev) {
+ async register(ev) {
     ev.preventDefault();
-    axios.post('http://localhost:3030/user/signup', {
-      email: this.state.email,
-      password: this.state.password,
-      name: this.state.name,
-    }, {withCredentials: true})
-      .then(() => {
-        this.context.checkAuth()
-          .then(() => this.setState({error:false,redirectToTheHomePage:true}));
+    try {
+      
+      const res= await axios.post('http://localhost:3030/user/signup', {
+        email: this.state.email,
+        username: this.state.username,
+        password: this.state.password
       })
-      .catch(error => {
-        this.setState({error:error.response.data});
-      });
+      return res.data
+    } catch (error) {
+      console.log(error);
+    }
+      // .then(() => {
+      //   this.context.checkAuth()
+      //     .then(() => this.setState({error:false,redirectToTheHomePage:true}));
+      // })
+      // .catch(error => {
+      //   this.setState({error:error.response.data});
+      // });
   }
   render() {
     return (<>
@@ -63,8 +69,8 @@ class RegisterPage extends Component {
         <form onSubmit={ev => this.register(ev)}>
           <Input placeholder={'email'} type="email" value={this.state.email}
                  onChange={ev => this.setState({email:ev.target.value})} />
-          <Input placeholder={'your username'} type="text" value={this.state.name}
-                 onChange={ev => this.setState({name:ev.target.value})} />
+          <Input placeholder={'your username'} type="text" value={this.state.username}
+                 onChange={ev => this.setState({username:ev.target.value})} />
           <Input placeholder={'password'} type="password" value={this.state.password}
                  autocomplete={'new-password'}
                  onChange={ev => this.setState({password:ev.target.value})} />

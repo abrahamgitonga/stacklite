@@ -5,3 +5,5 @@ CREATE TABLE users
     email VARCHAR(300) UNIQUE NOT NULL,
     [password] VARCHAR(300) NOT NULL,
 );
+
+ALTER TABLE dbo.users alter column _id VARCHAR(255) 

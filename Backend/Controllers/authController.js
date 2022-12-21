@@ -9,18 +9,19 @@ const dotenv= require("dotenv").config();
 const signupUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    const exists = await exec("getOneUser", { email });
-    //console.log(exists);
+    // const exists = await exec("getOneUser", { email });
+    // console.log(exists);
 
     const id = v4();
     const hashedpassword = await bcrypt.hash(password, 8);
-    const data = { _id, username, email, password: hashedpassword };
-    await exec("add_UpdateUser", data);
-    return res.status(201).json({ message: "success", error: "" });
+    const data = { id, username, email, password: hashedpassword };
+    console.log(data);
+    await exec('add_UpdateUser', data);
+     res.status(201).json({ message: "success"});
   } catch (error) {
     return res
       .status(400)
-      .json({ error: "user exists" });
+      .json({ error: error.message});
   }
 };
 

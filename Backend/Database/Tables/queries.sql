@@ -11,54 +11,54 @@
 -- )
 -- CREATE DATABASE stacklite
 
--- CREATE TABLE users
--- (
---     _id INT IDENTITY NOT NULL PRIMARY KEY,
---     username VARCHAR(300) NOT NULL,
---     email VARCHAR(300) UNIQUE NOT NULL,
---     [password] VARCHAR(300) NOT NULL,
--- );
+CREATE TABLE users
+(
+    _id VARCHAR(255) NOT NULL PRIMARY KEY,
+    username VARCHAR(300) NOT NULL,
+    email VARCHAR(300) UNIQUE NOT NULL,
+    [password] VARCHAR(300) NOT NULL,
+);
 
--- CREATE TABLE questions
--- (
---     _id INT NOT NULL PRIMARY KEY,
---     title VARCHAR(255) NOT NULL,
---     content TEXT NOT NULL,
---     author INT FOREIGN KEY REFERENCES users,
---     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
---     is_deleted BIT NOT NULL DEFAULT 0,
---     tags VARCHAR(300) NOT NULL DEFAULT ''
--- );
+CREATE TABLE questions
+(
+    _id VARCHAR(255) NOT NULL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    author VARCHAR(255) FOREIGN KEY REFERENCES users(_id),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    is_deleted BIT NOT NULL DEFAULT 0,
+    tags VARCHAR(300) NOT NULL DEFAULT ''
+);
 
--- CREATE TABLE answers
--- (
---     _id INT IDENTITY NOT NULL PRIMARY KEY,
---     content TEXT NOT NULL,
---     author INT FOREIGN KEY REFERENCES users,
---     question INT FOREIGN KEY REFERENCES questions,
---     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
---     is_deleted BIT NOT NULL DEFAULT 0,
---     marked BIT DEFAULT 0
--- );
+CREATE TABLE answers
+(
+    _id VARCHAR(255) NOT NULL PRIMARY KEY,
+    content TEXT NOT NULL,
+    author VARCHAR(255) FOREIGN KEY REFERENCES users(_id),
+    question VARCHAR(255) FOREIGN KEY REFERENCES questions(_id),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    is_deleted BIT NOT NULL DEFAULT 0,
+    marked BIT DEFAULT 0
+);
 
--- CREATE TABLE comments
--- (
---     _id INT IDENTITY NOT NULL PRIMARY KEY,
---     content TEXT NOT NULL,
---     author INT FOREIGN KEY REFERENCES users,
---     answer INT FOREIGN KEY REFERENCES answers,
---     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
---     is_deleted BIT NOT NULL DEFAULT 0,
--- );
+CREATE TABLE comments
+(
+    _id VARCHAR(255) NOT NULL PRIMARY KEY,
+    content TEXT NOT NULL,
+    author VARCHAR(255) FOREIGN KEY REFERENCES users(_id),
+    answer VARCHAR(255) FOREIGN KEY REFERENCES answers(_id),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    is_deleted BIT NOT NULL DEFAULT 0,
+);
 
--- CREATE TABLE votes
--- (
---     _id INT IDENTITY NOT NULL PRIMARY KEY,
---     author INT FOREIGN KEY REFERENCES users,
---     answer INT FOREIGN KEY REFERENCES answers,
---     votes INT NOT NULL
+CREATE TABLE votes
+(
+    _id VARCHAR(255) NOT NULL PRIMARY KEY,
+    author VARCHAR(255) FOREIGN KEY REFERENCES users(_id),
+    answer VARCHAR(255) FOREIGN KEY REFERENCES answers(_id),
+    votes INT NOT NULL
 
--- );
+);
 
 
 -- IF OBJECT_ID('users', 'U') IS NOT NULL
