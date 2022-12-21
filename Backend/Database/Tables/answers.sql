@@ -1,0 +1,11 @@
+-- CREATE TABLE answers
+-- (
+--     _id INT IDENTITY NOT NULL PRIMARY KEY,
+--     content TEXT NOT NULL,
+--     author INT FOREIGN KEY REFERENCES users,
+--     question INT FOREIGN KEY REFERENCES questions,
+--     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--     is_deleted BIT NOT NULL DEFAULT 0,
+--     marked
+-- );
+DROP TABLE answers
