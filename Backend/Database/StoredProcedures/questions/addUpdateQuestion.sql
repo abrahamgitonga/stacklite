@@ -2,7 +2,7 @@ CREATE
 OR ALTER PROCEDURE add_UpdateQuestions
     (
     @_id varchar(300),
-    @author varchar(300),
+    @author_id varchar(300),
     @title varchar(300),
     @content varchar(600),
     @tags varchar(600),
@@ -20,25 +20,25 @@ Begin
         questions
     where
     _id = @_id
-    if @exists = 0 --insert
+    if @exists = 0
 INSERT INTO
     questions
     VALUES
         (
             @_id,
-            @author,
+            @author_id,
             @title,
             @content,
             @tags,
             GETDATE(),
             @is_deleted
     )
-    else --update
+    else
 UPDATE
     questions
 set
     _id = @_id,
-    author = @author,
+    author = @author_id,
     title = @title,
     content = @content,
     tags = @tags

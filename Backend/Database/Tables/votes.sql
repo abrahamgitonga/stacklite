@@ -1,8 +1,8 @@
 CREATE TABLE votes
 (
-    _id INT IDENTITY NOT NULL PRIMARY KEY,
-    author INT FOREIGN KEY REFERENCES users,
-    answer INT FOREIGN KEY REFERENCES answers,
+    _id VARCHAR(255) NOT NULL PRIMARY KEY,
+    author_id VARCHAR(255) FOREIGN KEY REFERENCES users(_id),
+    answer VARCHAR(255) FOREIGN KEY REFERENCES answers(_id),
     votes INT NOT NULL
 
 );

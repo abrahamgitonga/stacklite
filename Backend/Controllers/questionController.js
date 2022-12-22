@@ -60,17 +60,21 @@ const getQuestion = async (req, res) => {
 };
 
 const postQuestion = async (req, res) => {
-  console.log("que");
-  const question = req.body;
-  const question_id = uuidv4();
-  const { id } = req.info;
+  // console.log("que");
+  try {
+    const { title, content, tags} = req.body;
+    const question_id = uuidv4();
+    const { id } = req.info;
+  
+    await exec("add_UpdateQuestion", {question_id,
+      id, title, content,tags
+    });
+    res.status(201).json({ message: `You have added the question ${id}` });
+    
+  } catch (error) {
+    res.status(401).json({message: error.message})
+  }
 
-  await exec("add_UpdateQuestion", {
-    ...question,
-    id: question_id,
-    user_id: id,
-  });
-  res.status(201).json({ message: `You have added the question ${id}` });
 };
 
 const updateQuestion = async (req, res) => {

@@ -6,7 +6,7 @@ dotenv.config()
 const verifyToken = async (req, res, next) => {
   try {
     const tokenAuth = req.headers["authorization"];
-    if (!tokenAuth || !tokenAuth.startsWith("Auth")) {
+    if (!tokenAuth) {
       res.status(401).json({ message: "You don't have access. Log in first" });
     } else {
       const token = tokenAuth.split(" ")[1];

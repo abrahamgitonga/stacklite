@@ -29,17 +29,29 @@ export default function AskPage() {
   const [tags,setTags] = useState([]);
   const [tagSuggestions,setTagSuggestions] = useState([]);
 
-  function sendQuestion(ev) {
+  async function sendQuestion(ev) {
     ev.preventDefault();
-    axios.post('http://localhost:3030/questions/', {
-      title: questionTitle,         
-      content: questionBody,
-      tags: tags.map(tag => tag.id), 
-    }, {withCredentials:true})
-      .then(response => {
-        console.log(response.data);
-        setNavigate('/questions/'+response.data[0]);
-      });
+
+    try {
+     const res = axios.post('http://localhost:3030/questions/', {
+        title: questionTitle,         
+        content: questionBody,
+        tags: tags.map(tag => tag.id), 
+      })
+      return res.data
+  
+      
+    } catch (error) {
+      console.log(error)
+      
+    }
+   
+
+    // , {withCredentials:true})
+    //   .then(response => {
+    //     console.log(response.data);
+    //     setNavigate('/questions/'+response.data[0]);
+    //   });
   }
 
   function getTags() {

@@ -19,33 +19,33 @@ CREATE TABLE users
     [password] VARCHAR(300) NOT NULL,
 );
 
-CREATE TABLE questions
-(
+
+create table questions(
     _id VARCHAR(255) NOT NULL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
+    title VARCHAR (255) NOT NULL,
     content TEXT NOT NULL,
-    author VARCHAR(255) FOREIGN KEY REFERENCES users(_id),
+    author_id VARCHAR(255) FOREIGN KEY REFERENCES users(_id),
+    tags VARCHAR(300) NOT NULL DEFAULT '',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    is_deleted BIT NOT NULL DEFAULT 0,
-    tags VARCHAR(300) NOT NULL DEFAULT ''
+    is_deleted BIT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE answers
 (
     _id VARCHAR(255) NOT NULL PRIMARY KEY,
     content TEXT NOT NULL,
-    author VARCHAR(255) FOREIGN KEY REFERENCES users(_id),
+    author_id VARCHAR(255) FOREIGN KEY REFERENCES users(_id),
     question VARCHAR(255) FOREIGN KEY REFERENCES questions(_id),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    marked BIT DEFAULT 0,
     is_deleted BIT NOT NULL DEFAULT 0,
-    marked BIT DEFAULT 0
 );
 
 CREATE TABLE comments
 (
     _id VARCHAR(255) NOT NULL PRIMARY KEY,
     content TEXT NOT NULL,
-    author VARCHAR(255) FOREIGN KEY REFERENCES users(_id),
+    author_id VARCHAR(255) FOREIGN KEY REFERENCES users(_id),
     answer VARCHAR(255) FOREIGN KEY REFERENCES answers(_id),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     is_deleted BIT NOT NULL DEFAULT 0,
@@ -138,62 +138,67 @@ CREATE TABLE votes
 -- End
 
 --proc3ques
--- CREATE
--- OR ALTER PROCEDURE add_UpdateQuestions
---     (
---     @_id varchar(300),
---     @author varchar(300),
---     @title varchar(300),
---     @content varchar(600),
---     @tags varchar(600),
---     @is_deleted bit = 0
--- )
--- As
--- Begin
---     SET
---     NOCOUNT ON;
+CREATE
+OR ALTER PROCEDURE add_UpdateQuestions
+    (
+    @_id varchar(300),
+    @author varchar(300),
+    @title varchar(300),
+    @content varchar(600),
+    @tags varchar(600),
+    @is_deleted bit = 0
+)
+As
+Begin
+    SET
+    NOCOUNT ON;
 
---     DECLARE @exists BIT
---     select
---         @exists = count(_id)
---     from
---         questions
---     where
---     _id = @_id
---     if @exists = 0 
--- INSERT INTO
---     questions
---     VALUES
---         (
---             @_id,
---             @author,
---             @title,
---             @content,
---             @tags,
---             GETDATE(),
---             @is_deleted
---     )
---     else
--- UPDATE
---     questions
--- set
---     _id = @_id,
---     author = @author,
---     title = @title,
---     content = @content,
---     tags = @tags
--- where
---     _id = @_id
--- End
--- Go
+    DECLARE @exists BIT
+    select
+        @exists = count(_id)
+    from
+        questions
+    where
+    _id = @_id
+    if @exists = 0 
+INSERT INTO
+    questions
+        (_id,)
+    VALUES
+        (
+            @_id,
+            @author,
+            @title,
+            @content,
+            @tags,
+            GETDATE(),
+            @is_deleted
+    )
+    else
+UPDATE
+    questions
+set
+    _id = @_id,
+    author = @author,
+    title = @title,
+    content = @content,
+    tags = @tags
+where
+    _id = @_id
+End
+Go
 
--- create or alter procedure addQuestion(@_id varchar(300), @author varchar(300), @content varchar(300))
--- as
--- begin
--- insert into questions(_id,author,content)
--- values (@_id,@author,@content);
+create or alter procedure addQuestion(@_id varchar(300),
+    @author varchar(300),
+    @content varchar(300))
+as
+begin
+    insert into questions
+        (_id,author,content)
+    values
+        (@_id, @author, @content);
 
--- end
+end
 
 
 --proc4ques

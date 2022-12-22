@@ -1,11 +1,10 @@
--- CREATE TABLE answers
--- (
---     _id INT IDENTITY NOT NULL PRIMARY KEY,
---     content TEXT NOT NULL,
---     author INT FOREIGN KEY REFERENCES users,
---     question INT FOREIGN KEY REFERENCES questions,
---     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
---     is_deleted BIT NOT NULL DEFAULT 0,
---     marked
--- );
-DROP TABLE answers
+CREATE TABLE answers
+(
+    _id VARCHAR(255) NOT NULL PRIMARY KEY,
+    content TEXT NOT NULL,
+    author_id VARCHAR(255) FOREIGN KEY REFERENCES users(_id),
+    question VARCHAR(255) FOREIGN KEY REFERENCES questions(_id),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    marked BIT DEFAULT 0,
+    is_deleted BIT NOT NULL DEFAULT 0
+);
